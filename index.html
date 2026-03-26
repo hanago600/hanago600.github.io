@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Your collection of learning tools">
+    <meta name="theme-color" content="#0a0a0f">
+    <title>Learn Hub | Your Learning Tools</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="./css/hub.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>">
+</head>
+<body>
+    <!-- Ambient Background -->
+    <div class="ambient-bg">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="glass-header">
+        <div class="header-content">
+            <div class="logo">
+                <span class="logo-icon">🎯</span>
+                <span class="logo-title">Learn Hub</span>
+            </div>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"/>
+                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                </svg>
+                <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="hub-container">
+        <div class="hero">
+            <h1>Your Collection of<br>Learning Tools</h1>
+            <p class="hero-subtitle">Learn new skills with interactive practice</p>
+        </div>
+
+        <!-- Features Grid -->
+        <div class="features-grid">
+            <!-- Morse Card -->
+            <a href="./morse/" class="feature-card">
+                <div class="feature-icon-wrapper">
+                    <span class="feature-icon">⚡</span>
+                </div>
+                <div class="feature-content">
+                    <h2>Morse</h2>
+                    <p class="feature-description">Learn Morse Code with interactive lessons, practice modes, and HAM radio training</p>
+                    <div class="feature-meta">
+                        <span class="feature-tag">Communication</span>
+                        <span class="feature-link">Enter →</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- HAM Radio Guide Card -->
+            <a href="./ham-guide/" class="feature-card">
+                <div class="feature-icon-wrapper">
+                    <span class="feature-icon">📻</span>
+                </div>
+                <div class="feature-content">
+                    <h2>HAM Radio Guide</h2>
+                    <p class="feature-description">Beginner's guide to amateur radio: phonetic alphabet, Q-codes, RST reports, and operating procedures</p>
+                    <div class="feature-meta">
+                        <span class="feature-tag">Reference</span>
+                        <span class="feature-link">Enter →</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Template for Future Features -->
+            <!-- 
+            <a href="./feature-name/" class="feature-card">
+                <div class="feature-icon-wrapper">
+                    <span class="feature-icon">🎯</span>
+                </div>
+                <div class="feature-content">
+                    <h2>Feature Name</h2>
+                    <p class="feature-description">Description of what this feature does</p>
+                    <div class="feature-meta">
+                        <span class="feature-tag">Category</span>
+                        <span class="feature-link">Enter →</span>
+                    </div>
+                </div>
+            </a>
+            -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="glass-footer">
+        <p>Learn Hub • <span id="footer-year"></span></p>
+    </footer>
+
+    <script>
+        document.getElementById('footer-year').textContent = new Date().getFullYear();
+        
+        // Theme handling - compatible with morse app storage
+        const themeToggle = document.getElementById('theme-toggle');
+        const STORAGE_KEY = 'morseCodeApp';
+        
+        // Load saved theme
+        function loadTheme() {
+            try {
+                const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+                const theme = data.settings?.theme || 'dark';
+                if (theme === 'light') {
+                    document.body.classList.add('light-theme');
+                }
+            } catch (e) {
+                console.warn('Could not load theme');
+            }
+        }
+        
+        // Toggle theme
+        themeToggle.addEventListener('click', () => {
+            const isLight = document.body.classList.toggle('light-theme');
+            const newTheme = isLight ? 'light' : 'dark';
+            
+            // Update localStorage with same structure as morse app
+            try {
+                const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+                if (!data.settings) data.settings = {};
+                data.settings.theme = newTheme;
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+            } catch (e) {
+                console.warn('Could not save theme');
+            }
+        });
+        
+        loadTheme();
+    </script>
+</body>
+</html>

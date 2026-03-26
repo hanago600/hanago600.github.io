@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Learn Morse Code with interactive lessons, practice modes, and real-time audio.">
+    <meta name="theme-color" content="#0f0f23">
+    <base href="./">
+    <title>Morse | Learn & Practice</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="./css/styles.css?v=4">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+    <!-- Ambient Background -->
+    <div class="ambient-bg">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="glass-header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">
+                    <span class="pulse-dot"></span>
+                    <span class="pulse-dash"></span>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-title">Morse</span>
+                    <span class="logo-subtitle">Learn Morse Code</span>
+                </div>
+            </div>
+            <a href="../" class="home-btn" title="Back to Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+                <span data-i18n="nav_home">Home</span>
+            </a>
+            <div class="header-actions">
+                <select class="lang-select" id="lang-select" aria-label="Select language">
+                    <option value="en">EN</option>
+                    <option value="zh">中文</option>
+                </select>
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                    <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"/>
+                        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                    </svg>
+                    <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav-bar">
+        <div class="nav-container">
+            <button class="nav-item active" data-mode="learn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                </svg>
+                <span data-i18n="nav_learn">Learn</span>
+            </button>
+            <button class="nav-item" data-mode="encode">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 19l7-7 3 3-7 7-3-3z"/>
+                    <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>
+                    <path d="M2 2l7.586 7.586"/>
+                    <circle cx="11" cy="11" r="2"/>
+                </svg>
+                <span data-i18n="nav_encode">Encode</span>
+            </button>
+            <button class="nav-item" data-mode="decode">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                    <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                    <line x1="12" y1="19" x2="12" y2="23"/>
+                    <line x1="8" y1="23" x2="16" y2="23"/>
+                </svg>
+                <span data-i18n="nav_decode">Decode</span>
+            </button>
+            <button class="nav-item" data-mode="flashcards">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                    <line x1="16" y1="2" x2="16" y2="6"/>
+                    <line x1="8" y1="2" x2="8" y2="6"/>
+                    <line x1="3" y1="10" x2="21" y2="10"/>
+                </svg>
+                <span data-i18n="nav_flashcards">Cards</span>
+            </button>
+            <button class="nav-item" data-mode="quiz">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+                <span data-i18n="nav_quiz">Quiz</span>
+            </button>
+            <button class="nav-item" data-mode="practiceall">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                </svg>
+                <span data-i18n="nav_practiceall">All</span>
+            </button>
+            <button class="nav-item" data-mode="ham">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                    <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                    <line x1="12" y1="19" x2="12" y2="22"/>
+                    <circle cx="12" cy="5" r="1"/>
+                </svg>
+                <span data-i18n="nav_ham">HAM</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Settings Panel -->
+        <section class="settings-card glass-card">
+            <div class="setting-group">
+                <label class="setting-label">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                    </svg>
+                    <span data-i18n="settings_speed">Speed</span>
+                </label>
+                <div class="slider-container">
+                    <input type="range" id="wpm-slider" min="5" max="40" value="15">
+                    <span class="slider-value" id="wpm-value">15 WPM</span>
+                </div>
+            </div>
+            <div class="setting-group">
+                <label class="setting-label">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 18V5l12-2v13"/>
+                        <circle cx="6" cy="18" r="3"/>
+                        <circle cx="18" cy="16" r="3"/>
+                    </svg>
+                    <span data-i18n="settings_tone">Tone</span>
+                </label>
+                <div class="slider-container">
+                    <input type="range" id="freq-slider" min="400" max="1000" value="800">
+                    <span class="slider-value" id="freq-value">800 Hz</span>
+                </div>
+            </div>
+            <div class="setting-group">
+                <label class="setting-label">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+                    </svg>
+                    <span data-i18n="settings_volume">Volume</span>
+                </label>
+                <div class="slider-container">
+                    <input type="range" id="volume-slider" min="0" max="100" value="50">
+                    <span class="slider-value" id="volume-value">50%</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Bar -->
+        <section class="stats-container">
+            <div class="stat-item glass-card">
+                <div class="stat-icon accuracy">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                        <polyline points="22 4 12 14.01 9 11.01"/>
+                    </svg>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-value" id="stat-accuracy">0%</span>
+                    <span class="stat-label" data-i18n="stat_accuracy">Accuracy</span>
+                </div>
+            </div>
+            <div class="stat-item glass-card">
+                <div class="stat-icon streak">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                    </svg>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-value" id="stat-streak">0</span>
+                    <span class="stat-label" data-i18n="stat_streak">Streak</span>
+                </div>
+            </div>
+            <div class="stat-item glass-card">
+                <div class="stat-icon best">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-value" id="stat-best">0</span>
+                    <span class="stat-label" data-i18n="stat_best">Best</span>
+                </div>
+            </div>
+            <div class="stat-item glass-card">
+                <div class="stat-icon learned">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                        <line x1="16" y1="13" x2="8" y2="13"/>
+                        <line x1="16" y1="17" x2="8" y2="17"/>
+                        <polyline points="10 9 9 9 8 9"/>
+                    </svg>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-value" id="stat-learned">0</span>
+                    <span class="stat-label" data-i18n="stat_learned">Learned</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Learn Mode -->
+        <section id="mode-learn" class="mode-section active">
+            <div class="section-header">
+                <h2 data-i18n="learn_title">Reference Chart</h2>
+                <p class="section-desc" data-i18n="learn_desc">Click any character to hear its sound. Track your progress as you learn.</p>
+            </div>
+            <div class="chart-container glass-card" id="morse-chart">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+        <!-- Encode Mode -->
+        <section id="mode-encode" class="mode-section">
+            <div class="practice-wrapper">
+                <div class="practice-card glass-card">
+                    <div class="practice-header">
+                        <span class="practice-badge" data-i18n="encode_title">Encode</span>
+                        <button class="icon-btn" onclick="app.nextQuestion()" title="Skip">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon points="5 4 15 12 5 20 5 4"/>
+                                <line x1="19" y1="5" x2="19" y2="19"/>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <div class="practice-display">
+                        <div class="target-char" id="encode-char">A</div>
+                        <div class="target-morse hidden" id="encode-morse">.-</div>
+                    </div>
+                    
+                    <div class="input-section">
+                        <div class="input-preview" id="user-input">
+                            <span class="placeholder" data-i18n="encode_placeholder">Your answer...</span>
+                        </div>
+                        
+                        <div class="input-pad">
+                            <button class="pad-btn dot" id="btn-dot">
+                                <span class="btn-content">
+                                    <span class="btn-icon">•</span>
+                                    <span class="btn-label" data-i18n="btn_dot">Dot</span>
+                                </span>
+                            </button>
+                            <button class="pad-btn dash" id="btn-dash">
+                                <span class="btn-content">
+                                    <span class="btn-icon">−</span>
+                                    <span class="btn-label" data-i18n="btn_dash">Dash</span>
+                                </span>
+                            </button>
+                            <button class="pad-btn clear" id="btn-clear">
+                                <span class="btn-content">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                    </svg>
+                                    <span class="btn-label" data-i18n="btn_clear">Clear</span>
+                                </span>
+                            </button>
+                        </div>
+                        
+                        <button class="submit-btn" id="btn-submit">
+                            <span data-i18n="btn_submit">Submit Answer</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <div class="feedback-message" id="encode-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Decode Mode -->
+        <section id="mode-decode" class="mode-section">
+            <div class="practice-wrapper">
+                <div class="practice-card glass-card">
+                    <div class="practice-header">
+                        <span class="practice-badge" data-i18n="decode_title">Decode</span>
+                        <button class="icon-btn" onclick="app.playCurrentDecode()" title="Play again">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon points="5 3 19 12 5 21 5 3"/>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <div class="decode-display">
+                        <div class="listening-indicator">
+                            <div class="sound-wave">
+                                <span></span><span></span><span></span><span></span><span></span>
+                            </div>
+                            <p data-i18n="decode_listening">Listen to the code...</p>
+                        </div>
+                        <div class="decode-answer" id="decode-answer">?</div>
+                    </div>
+                    
+                    <div class="decode-instruction">
+                        <p data-i18n="decode_instruction">Press any letter key (A-Z) or number to answer</p>
+                    </div>
+                    
+                    <!-- On-screen Keyboard - US Layout -->
+                    <div class="decode-keyboard">
+                        <!-- Row 1: Numbers -->
+                        <div class="keyboard-row numbers-row">
+                            <button class="key-btn number" onclick="app.handleDecodeKey('1')">1</button>
+                            <button class="key-btn number" onclick="app.handleDecodeKey('2')">2</button>
+                            <button class="key-btn number" onclick="app.handleDecodeKey('3')">3</button>
+                            <button class="key-btn number" onclick="app.handleDecodeKey('4')">4</button>
+                            <button class="key-btn number" onclick="app.handleDecodeKey('5')">5</button>
+                            <button class="key-btn number" onclick="app.handleDecodeKey('6')">6</button>
+                            <button class="key-btn number" onclick="app.handleDecodeKey('7')">7</button>
+                            <button class="key-btn number" onclick="app.handleDecodeKey('8')">8</button>
+                            <button class="key-btn number" onclick="app.handleDecodeKey('9')">9</button>
+                            <button class="key-btn number" onclick="app.handleDecodeKey('0')">0</button>
+                        </div>
+                        <!-- Row 2: QWERTYUIOP -->
+                        <div class="keyboard-row">
+                            <button class="key-btn" onclick="app.handleDecodeKey('Q')">Q</button>
+                            <button class="key-btn" onclick="app.handleDecodeKey('W')">W</button>
+                            <button class="key-btn" onclick="app.handleDecodeKey('E')">E</button>
+                            <button class="key-btn" onclick="app.handleDecodeKey('R')">R</button>
+                            <button class="key-btn" onclick="app.handleDecodeKey('T')">T</button>
+                            <button class="key-btn" onclick="app.handleDecodeKey('Y')">Y</button>
+                            <button class="key-btn" onclick="app.handleDecodeKey('U')">U</button>
+                            <button class="key-btn" onclick="app.handleDecodeKey('I')">I</button>
+                            <button class="key-btn" onclick="app.handleDecodeKey('O')">O</button>
+                            <button class="key-btn" onclick="app.handleDecodeKey('P')">P</button>
+                        </div>
+                        <!-- Row 3: ASDFGHJKL -->
+                        <div class="keyboard-row">
+                            <button class="key-btn" onclick="app.handleDecodeKey('A')">A</button>
+                            <button class="key-btn" onclick="app.handleDecodeKey('S')">S</button>
+                            <button class="key-btn" onclick="app.handleDecodeKey('D')">D</button>
+                            <button class="key-btn" onclick="app.handleDecodeKey('F')">F</button>
+                            <button class="key-btn" onclick="app.handleDecodeKey('G')">G</button>
+                            <button class="key-btn" onclick="app.handleDecodeKey('H')">H</button>
+                            <button class="key-btn" onclick="app.handleDecodeKey('J')">J</button>
+                            <button class="key-btn" onclick="app.handleDecodeKey('K')">K</button>
+                            <button class="key-btn" onclick="app.handleDecodeKey('L')">L</button>
+                        </div>
+                        <!-- Row 4: ZXCVBNM -->
+                        <div class="keyboard-row">
+                            <button class="key-btn" onclick="app.handleDecodeKey('Z')">Z</button>
+                            <button class="key-btn" onclick="app.handleDecodeKey('X')">X</button>
+                            <button class="key-btn" onclick="app.handleDecodeKey('C')">C</button>
+                            <button class="key-btn" onclick="app.handleDecodeKey('V')">V</button>
+                            <button class="key-btn" onclick="app.handleDecodeKey('B')">B</button>
+                            <button class="key-btn" onclick="app.handleDecodeKey('N')">N</button>
+                            <button class="key-btn" onclick="app.handleDecodeKey('M')">M</button>
+                        </div>
+                    </div>
+                    
+                    <div class="feedback-message" id="decode-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Flashcards Mode -->
+        <section id="mode-flashcards" class="mode-section">
+            <div class="flashcard-wrapper">
+                <div class="flashcard-container">
+                    <div class="flashcard" id="flashcard">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">
+                                <span class="card-char">A</span>
+                                <span class="card-hint" data-i18n="flashcards_hint">Tap to reveal</span>
+                            </div>
+                            <div class="flashcard-back">
+                                <span class="card-morse">.-</span>
+                                <span class="card-label" data-i18n="flashcards_label">Morse Code</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flashcard-controls">
+                    <button class="control-btn secondary" id="btn-play-card">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="5 3 19 12 5 21 5 3"/>
+                        </svg>
+                        <span data-i18n="btn_play">Play Sound</span>
+                    </button>
+                    <button class="control-btn primary" id="btn-next-card">
+                        <span data-i18n="btn_next">Next Card</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                            <polyline points="12 5 19 12 12 19"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Mode -->
+        <section id="mode-quiz" class="mode-section">
+            <div class="quiz-wrapper">
+                <div class="quiz-card glass-card">
+                    <div class="quiz-progress-bar">
+                        <div class="progress-fill" id="quiz-progress-fill"></div>
+                    </div>
+                    
+                    <div class="quiz-header">
+                        <span class="quiz-step" id="quiz-progress">Question 1 of 10</span>
+                    </div>
+                    
+                    <div class="quiz-question">
+                        <div class="quiz-char-display" id="quiz-char">A</div>
+                        <p class="quiz-instruction" data-i18n="quiz_instruction">Enter the Morse code for this character</p>
+                    </div>
+                    
+                    <div class="quiz-input-section">
+                        <div class="input-preview" id="quiz-input-preview">
+                            <span class="placeholder" data-i18n="quiz_placeholder">Enter Morse code...</span>
+                        </div>
+                        
+                        <div class="input-pad" style="margin-bottom: 1rem;">
+                            <button class="pad-btn dot" onclick="app.handleQuizInput('.')">
+                                <span class="btn-content">
+                                    <span class="btn-icon">•</span>
+                                    <span class="btn-label" data-i18n="btn_dot">Dot</span>
+                                </span>
+                            </button>
+                            <button class="pad-btn dash" onclick="app.handleQuizInput('-')">
+                                <span class="btn-content">
+                                    <span class="btn-icon">−</span>
+                                    <span class="btn-label" data-i18n="btn_dash">Dash</span>
+                                </span>
+                            </button>
+                            <button class="pad-btn clear" onclick="app.clearQuizInput()">
+                                <span class="btn-content">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                    </svg>
+                                    <span class="btn-label" data-i18n="btn_clear">Clear</span>
+                                </span>
+                            </button>
+                        </div>
+                        
+                        <input type="hidden" id="quiz-input" value="">
+                        
+                        <button class="submit-btn" onclick="app.submitQuizAnswer()" style="margin: 0 auto; display: flex; padding: 0 2rem;">
+                            <span data-i18n="btn_submit">Submit Answer</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <div class="feedback-message" id="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Practice All Mode -->
+        <section id="mode-practiceall" class="mode-section">
+            <div class="quiz-wrapper">
+                <div class="quiz-card glass-card">
+                    <div class="quiz-progress-bar">
+                        <div class="progress-fill" id="practiceall-progress-fill"></div>
+                    </div>
+                    
+                    <div class="quiz-header">
+                        <span class="quiz-step" id="practiceall-progress">Character 1 of 36</span>
+                    </div>
+                    
+                    <div class="quiz-question">
+                        <div class="quiz-char-display" id="practiceall-char">A</div>
+                        <p class="quiz-instruction">Enter the Morse code for this character</p>
+                    </div>
+                    
+                    <div class="quiz-input-section">
+                        <div class="input-preview" id="practiceall-input-preview">
+                            <span class="placeholder">Enter Morse code...</span>
+                        </div>
+                        
+                        <div class="input-pad" style="margin-bottom: 1rem;">
+                            <button class="pad-btn dot" onclick="app.handlePracticeAllInput('.')">
+                                <span class="btn-content">
+                                    <span class="btn-icon">•</span>
+                                    <span class="btn-label" data-i18n="btn_dot">Dot</span>
+                                </span>
+                            </button>
+                            <button class="pad-btn dash" onclick="app.handlePracticeAllInput('-')">
+                                <span class="btn-content">
+                                    <span class="btn-icon">−</span>
+                                    <span class="btn-label" data-i18n="btn_dash">Dash</span>
+                                </span>
+                            </button>
+                            <button class="pad-btn clear" onclick="app.clearPracticeAllInput()">
+                                <span class="btn-content">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                    </svg>
+                                    <span class="btn-label" data-i18n="btn_clear">Clear</span>
+                                </span>
+                            </button>
+                        </div>
+                        
+                        <input type="hidden" id="practiceall-input" value="">
+                        
+                        <button class="submit-btn" onclick="app.submitPracticeAllAnswer()" style="margin: 0 auto; display: flex; padding: 0 2rem;">
+                            <span data-i18n="btn_submit">Submit Answer</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <div class="feedback-message" id="practiceall-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HAM Radio Mode -->
+        <section id="mode-ham" class="mode-section">
+            <div class="section-header">
+                <h2 data-i18n="ham_title">HAM Radio Mode</h2>
+                <p class="section-desc" data-i18n="ham_desc">Practice amateur radio Q-codes, prosigns, and callsigns</p>
+            </div>
+            
+            <div class="ham-container">
+                <!-- HAM Sub-navigation -->
+                <div class="ham-nav">
+                    <button class="ham-nav-btn active" data-ham-mode="qcodes" data-i18n="ham_qcodes">Q-Codes</button>
+                    <button class="ham-nav-btn" data-ham-mode="prosigns" data-i18n="ham_prosigns">Prosigns</button>
+                    <button class="ham-nav-btn" data-ham-mode="callsigns" data-i18n="ham_callsigns">Callsigns</button>
+                    <button class="ham-nav-btn" data-ham-mode="abbr" data-i18n="ham_abbr">Abbreviations</button>
+                    <button class="ham-nav-btn" data-ham-mode="qso">QSO Practice</button>
+                    <button class="ham-nav-btn" data-ham-mode="cwpractice" data-i18n="ham_cwpractice">CW Practice</button>
+                </div>
+
+                <!-- Q-Codes Section -->
+                <div class="ham-subsection active" id="ham-qcodes">
+                    <div class="practice-wrapper">
+                        <div class="practice-card glass-card" style="max-width: 900px;">
+                            <div class="practice-header">
+                                <span class="practice-badge" data-i18n="ham_qcodes">Q-Code Practice</span>
+                                <button class="icon-btn" onclick="app.nextQCode()" title="Next">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polygon points="5 4 15 12 5 20 5 4"/>
+                                        <line x1="19" y1="5" x2="19" y2="19"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            
+                            <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+                                <!-- Practice Area -->
+                                <div style="flex: 1; min-width: 300px;">
+                                    <div class="practice-display">
+                                        <div class="target-char" id="qcode-display" style="font-size: 4rem; font-family: 'JetBrains Mono', monospace; filter: blur(8px); opacity: 0.3;">????</div>
+                                        <div class="qcode-meaning" id="qcode-meaning" style="display: none; margin-top: 1rem; padding: 1rem; background: rgba(0,0,0,0.2); border-radius: 8px; color: var(--text-secondary);"></div>
+                                    </div>
+                                    
+                                    <div class="input-section">
+                                        <input type="text" class="quiz-input" id="qcode-input" placeholder="Type the Q-Code..." autocomplete="off" style="text-transform: uppercase;">
+                                        
+                                        <!-- On-screen Keyboard for Q-Codes -->
+                                        <div class="callsign-keyboard">
+                                            <!-- Letters Row 1: QWERTYUIOP -->
+                                            <div class="keyboard-row">
+                                                <button class="key-btn" onclick="app.handleQCodeKey('Q')">Q</button>
+                                                <button class="key-btn" onclick="app.handleQCodeKey('W')">W</button>
+                                                <button class="key-btn" onclick="app.handleQCodeKey('E')">E</button>
+                                                <button class="key-btn" onclick="app.handleQCodeKey('R')">R</button>
+                                                <button class="key-btn" onclick="app.handleQCodeKey('T')">T</button>
+                                                <button class="key-btn" onclick="app.handleQCodeKey('Y')">Y</button>
+                                                <button class="key-btn" onclick="app.handleQCodeKey('U')">U</button>
+                                                <button class="key-btn" onclick="app.handleQCodeKey('I')">I</button>
+                                                <button class="key-btn" onclick="app.handleQCodeKey('O')">O</button>
+                                                <button class="key-btn" onclick="app.handleQCodeKey('P')">P</button>
+                                            </div>
+                                            <!-- Letters Row 2: ASDFGHJKL -->
+                                            <div class="keyboard-row">
+                                                <button class="key-btn" onclick="app.handleQCodeKey('A')">A</button>
+                                                <button class="key-btn" onclick="app.handleQCodeKey('S')">S</button>
+                                                <button class="key-btn" onclick="app.handleQCodeKey('D')">D</button>
+                                                <button class="key-btn" onclick="app.handleQCodeKey('F')">F</button>
+                                                <button class="key-btn" onclick="app.handleQCodeKey('G')">G</button>
+                                                <button class="key-btn" onclick="app.handleQCodeKey('H')">H</button>
+                                                <button class="key-btn" onclick="app.handleQCodeKey('J')">J</button>
+                                                <button class="key-btn" onclick="app.handleQCodeKey('K')">K</button>
+                                                <button class="key-btn" onclick="app.handleQCodeKey('L')">L</button>
+                                            </div>
+                                            <!-- Letters Row 3: ZXCVBNM -->
+                                            <div class="keyboard-row">
+                                                <button class="key-btn" onclick="app.handleQCodeKey('Z')">Z</button>
+                                                <button class="key-btn" onclick="app.handleQCodeKey('X')">X</button>
+                                                <button class="key-btn" onclick="app.handleQCodeKey('C')">C</button>
+                                                <button class="key-btn" onclick="app.handleQCodeKey('V')">V</button>
+                                                <button class="key-btn" onclick="app.handleQCodeKey('B')">B</button>
+                                                <button class="key-btn" onclick="app.handleQCodeKey('N')">N</button>
+                                                <button class="key-btn" onclick="app.handleQCodeKey('M')">M</button>
+                                                <button class="key-btn clear" onclick="app.handleQCodeClear()">
+                                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px;">
+                                                        <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                                    </svg>
+                                                </button>
+                                                <button class="key-btn enter" onclick="app.handleQCodeEnter()">
+                                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px;">
+                                                        <polyline points="20 6 9 17 4 12"/>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="feedback-message" id="qcode-feedback"></div>
+                                        
+                                        <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                                            <button class="submit-btn" onclick="app.checkQCode()" style="flex: 1; padding: 0 2rem;">
+                                                <span data-i18n="btn_submit">Submit Answer</span>
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <polyline points="20 6 9 17 4 12"/>
+                                                </svg>
+                                            </button>
+                                            <button class="control-btn secondary" onclick="app.playCurrentQCode()">
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px;">
+                                                    <polygon points="5 3 19 12 5 21 5 3"/>
+                                                </svg>
+                                                <span>Play</span>
+                                            </button>
+                                        </div>
+                                        
+                                        <button class="control-btn secondary" onclick="app.revealQCode()" style="width: 100%; margin-top: 0.5rem;">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;">
+                                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                                <circle cx="12" cy="12" r="3"/>
+                                            </svg>
+                                            <span>Show Answer</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Reference Table -->
+                                <div style="flex: 1; min-width: 280px; max-width: 400px;">
+                                    <div class="glass-card ham-reference" id="qcodes-list-practice" style="max-height: 500px; overflow-y: auto;">
+                                        <!-- Populated by JS -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Prosigns Section -->
+                <div class="ham-subsection" id="ham-prosigns">
+                    <div class="practice-wrapper">
+                        <div class="practice-card glass-card" style="max-width: 900px;">
+                            <div class="practice-header">
+                                <span class="practice-badge" data-i18n="ham_prosigns">Prosign Practice</span>
+                                <button class="icon-btn" onclick="app.nextProsign()" title="Next">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polygon points="5 4 15 12 5 20 5 4"/>
+                                        <line x1="19" y1="5" x2="19" y2="19"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            
+                            <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+                                <!-- Practice Area -->
+                                <div style="flex: 1; min-width: 300px;">
+                                    <div class="practice-display">
+                                        <div class="target-char" id="prosign-display" style="font-size: 4rem; font-family: 'JetBrains Mono', monospace; filter: blur(8px); opacity: 0.3;">????</div>
+                                        <div class="prosign-meaning" id="prosign-meaning" style="display: none; margin-top: 1rem; padding: 1rem; background: rgba(0,0,0,0.2); border-radius: 8px; color: var(--text-secondary);"></div>
+                                    </div>
+                                    
+                                    <div class="input-section">
+                                        <input type="text" class="quiz-input" id="prosign-input" placeholder="Type the Prosign..." autocomplete="off" style="text-transform: uppercase;">
+                                        
+                                        <!-- On-screen Keyboard for Prosigns -->
+                                        <div class="callsign-keyboard">
+                                            <!-- Letters Row 1: QWERTYUIOP -->
+                                            <div class="keyboard-row">
+                                                <button class="key-btn" onclick="app.handleProsignKey('Q')">Q</button>
+                                                <button class="key-btn" onclick="app.handleProsignKey('W')">W</button>
+                                                <button class="key-btn" onclick="app.handleProsignKey('E')">E</button>
+                                                <button class="key-btn" onclick="app.handleProsignKey('R')">R</button>
+                                                <button class="key-btn" onclick="app.handleProsignKey('T')">T</button>
+                                                <button class="key-btn" onclick="app.handleProsignKey('Y')">Y</button>
+                                                <button class="key-btn" onclick="app.handleProsignKey('U')">U</button>
+                                                <button class="key-btn" onclick="app.handleProsignKey('I')">I</button>
+                                                <button class="key-btn" onclick="app.handleProsignKey('O')">O</button>
+                                                <button class="key-btn" onclick="app.handleProsignKey('P')">P</button>
+                                            </div>
+                                            <!-- Letters Row 2: ASDFGHJKL -->
+                                            <div class="keyboard-row">
+                                                <button class="key-btn" onclick="app.handleProsignKey('A')">A</button>
+                                                <button class="key-btn" onclick="app.handleProsignKey('S')">S</button>
+                                                <button class="key-btn" onclick="app.handleProsignKey('D')">D</button>
+                                                <button class="key-btn" onclick="app.handleProsignKey('F')">F</button>
+                                                <button class="key-btn" onclick="app.handleProsignKey('G')">G</button>
+                                                <button class="key-btn" onclick="app.handleProsignKey('H')">H</button>
+                                                <button class="key-btn" onclick="app.handleProsignKey('J')">J</button>
+                                                <button class="key-btn" onclick="app.handleProsignKey('K')">K</button>
+                                                <button class="key-btn" onclick="app.handleProsignKey('L')">L</button>
+                                            </div>
+                                            <!-- Letters Row 3: ZXCVBNM -->
+                                            <div class="keyboard-row">
+                                                <button class="key-btn" onclick="app.handleProsignKey('Z')">Z</button>
+                                                <button class="key-btn" onclick="app.handleProsignKey('X')">X</button>
+                                                <button class="key-btn" onclick="app.handleProsignKey('C')">C</button>
+                                                <button class="key-btn" onclick="app.handleProsignKey('V')">V</button>
+                                                <button class="key-btn" onclick="app.handleProsignKey('B')">B</button>
+                                                <button class="key-btn" onclick="app.handleProsignKey('N')">N</button>
+                                                <button class="key-btn" onclick="app.handleProsignKey('M')">M</button>
+                                                <button class="key-btn clear" onclick="app.handleProsignClear()">
+                                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px;">
+                                                        <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                                    </svg>
+                                                </button>
+                                                <button class="key-btn enter" onclick="app.handleProsignEnter()">
+                                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px;">
+                                                        <polyline points="20 6 9 17 4 12"/>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="feedback-message" id="prosign-feedback"></div>
+                                        
+                                        <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                                            <button class="submit-btn" onclick="app.checkProsign()" style="flex: 1; padding: 0 2rem;">
+                                                <span data-i18n="btn_submit">Submit Answer</span>
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <polyline points="20 6 9 17 4 12"/>
+                                                </svg>
+                                            </button>
+                                            <button class="control-btn secondary" onclick="app.playCurrentProsign()">
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px;">
+                                                    <polygon points="5 3 19 12 5 21 5 3"/>
+                                                </svg>
+                                                <span>Play</span>
+                                            </button>
+                                        </div>
+                                        
+                                        <button class="control-btn secondary" onclick="app.revealProsign()" style="width: 100%; margin-top: 0.5rem;">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;">
+                                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                                <circle cx="12" cy="12" r="3"/>
+                                            </svg>
+                                            <span>Show Answer</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Reference Table -->
+                                <div style="flex: 1; min-width: 280px; max-width: 400px;">
+                                    <div class="glass-card ham-reference" id="prosigns-list-practice" style="max-height: 500px; overflow-y: auto;">
+                                        <!-- Populated by JS -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Callsigns Section -->
+                <div class="ham-subsection" id="ham-callsigns">
+                    <div class="practice-wrapper">
+                        <div class="practice-card glass-card">
+                            <div class="practice-header">
+                                <span class="practice-badge" data-i18n="ham_callsigns">Callsign Practice</span>
+                                <button class="icon-btn" onclick="app.nextCallsign()" title="Next">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polygon points="5 4 15 12 5 20 5 4"/>
+                                        <line x1="19" y1="5" x2="19" y2="19"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            
+                            <div class="practice-display">
+                                <div class="target-char" id="callsign-display" style="font-size: 4rem; font-family: 'JetBrains Mono', monospace; filter: blur(8px); opacity: 0.3;">?????</div>
+                            </div>
+                            
+                            <div class="input-section">
+                                <input type="text" class="quiz-input" id="callsign-input" placeholder="Type the callsign..." autocomplete="off" style="text-transform: uppercase;">
+                                
+                                <!-- On-screen Keyboard for Callsigns -->
+                                <div class="callsign-keyboard">
+                                    <!-- Numbers -->
+                                    <div class="keyboard-row numbers-row">
+                                        <button class="key-btn number" onclick="app.handleCallsignKey('1')">1</button>
+                                        <button class="key-btn number" onclick="app.handleCallsignKey('2')">2</button>
+                                        <button class="key-btn number" onclick="app.handleCallsignKey('3')">3</button>
+                                        <button class="key-btn number" onclick="app.handleCallsignKey('4')">4</button>
+                                        <button class="key-btn number" onclick="app.handleCallsignKey('5')">5</button>
+                                        <button class="key-btn number" onclick="app.handleCallsignKey('6')">6</button>
+                                        <button class="key-btn number" onclick="app.handleCallsignKey('7')">7</button>
+                                        <button class="key-btn number" onclick="app.handleCallsignKey('8')">8</button>
+                                        <button class="key-btn number" onclick="app.handleCallsignKey('9')">9</button>
+                                        <button class="key-btn number" onclick="app.handleCallsignKey('0')">0</button>
+                                    </div>
+                                    <!-- Letters Row 1: QWERTYUIOP -->
+                                    <div class="keyboard-row">
+                                        <button class="key-btn" onclick="app.handleCallsignKey('Q')">Q</button>
+                                        <button class="key-btn" onclick="app.handleCallsignKey('W')">W</button>
+                                        <button class="key-btn" onclick="app.handleCallsignKey('E')">E</button>
+                                        <button class="key-btn" onclick="app.handleCallsignKey('R')">R</button>
+                                        <button class="key-btn" onclick="app.handleCallsignKey('T')">T</button>
+                                        <button class="key-btn" onclick="app.handleCallsignKey('Y')">Y</button>
+                                        <button class="key-btn" onclick="app.handleCallsignKey('U')">U</button>
+                                        <button class="key-btn" onclick="app.handleCallsignKey('I')">I</button>
+                                        <button class="key-btn" onclick="app.handleCallsignKey('O')">O</button>
+                                        <button class="key-btn" onclick="app.handleCallsignKey('P')">P</button>
+                                    </div>
+                                    <!-- Letters Row 2: ASDFGHJKL -->
+                                    <div class="keyboard-row">
+                                        <button class="key-btn" onclick="app.handleCallsignKey('A')">A</button>
+                                        <button class="key-btn" onclick="app.handleCallsignKey('S')">S</button>
+                                        <button class="key-btn" onclick="app.handleCallsignKey('D')">D</button>
+                                        <button class="key-btn" onclick="app.handleCallsignKey('F')">F</button>
+                                        <button class="key-btn" onclick="app.handleCallsignKey('G')">G</button>
+                                        <button class="key-btn" onclick="app.handleCallsignKey('H')">H</button>
+                                        <button class="key-btn" onclick="app.handleCallsignKey('J')">J</button>
+                                        <button class="key-btn" onclick="app.handleCallsignKey('K')">K</button>
+                                        <button class="key-btn" onclick="app.handleCallsignKey('L')">L</button>
+                                    </div>
+                                    <!-- Letters Row 3: ZXCVBNM -->
+                                    <div class="keyboard-row">
+                                        <button class="key-btn" onclick="app.handleCallsignKey('Z')">Z</button>
+                                        <button class="key-btn" onclick="app.handleCallsignKey('X')">X</button>
+                                        <button class="key-btn" onclick="app.handleCallsignKey('C')">C</button>
+                                        <button class="key-btn" onclick="app.handleCallsignKey('V')">V</button>
+                                        <button class="key-btn" onclick="app.handleCallsignKey('B')">B</button>
+                                        <button class="key-btn" onclick="app.handleCallsignKey('N')">N</button>
+                                        <button class="key-btn" onclick="app.handleCallsignKey('M')">M</button>
+                                        <button class="key-btn clear" onclick="app.handleCallsignClear()">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px;">
+                                                <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                            </svg>
+                                        </button>
+                                        <button class="key-btn enter" onclick="app.handleCallsignEnter()">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px;">
+                                                <polyline points="20 6 9 17 4 12"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="feedback-message" id="callsign-feedback"></div>
+                                
+                                <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                                    <button class="submit-btn" onclick="app.checkCallsign()" style="flex: 1; padding: 0 2rem;">
+                                        <span data-i18n="btn_submit">Submit Answer</span>
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="20 6 9 17 4 12"/>
+                                        </svg>
+                                    </button>
+                                    <button class="control-btn secondary" onclick="app.playCurrentCallsign()">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px;">
+                                            <polygon points="5 3 19 12 5 21 5 3"/>
+                                        </svg>
+                                        <span>Play</span>
+                                    </button>
+                                </div>
+                                
+                                <button class="control-btn secondary" onclick="app.revealCallsign()" style="width: 100%; margin-top: 0.5rem;">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                        <circle cx="12" cy="12" r="3"/>
+                                    </svg>
+                                    <span>Show Answer</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Abbreviations Section -->
+                <div class="ham-subsection" id="ham-abbr">
+                    <div class="practice-wrapper">
+                        <div class="practice-card glass-card" style="max-width: 900px;">
+                            <div class="practice-header">
+                                <span class="practice-badge" data-i18n="ham_abbr">Abbreviation Practice</span>
+                                <button class="icon-btn" onclick="app.nextAbbreviation()" title="Next">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polygon points="5 4 15 12 5 20 5 4"/>
+                                        <line x1="19" y1="5" x2="19" y2="19"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            
+                            <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+                                <!-- Practice Area -->
+                                <div style="flex: 1; min-width: 300px;">
+                                    <div class="practice-display">
+                                        <div class="target-char" id="abbr-display" style="font-size: 4rem; font-family: 'JetBrains Mono', monospace; filter: blur(8px); opacity: 0.3;">????</div>
+                                        <div class="abbr-meaning" id="abbr-meaning" style="display: none; margin-top: 1rem; padding: 1rem; background: rgba(0,0,0,0.2); border-radius: 8px; color: var(--text-secondary);"></div>
+                                    </div>
+                                    
+                                    <div class="input-section">
+                                        <input type="text" class="quiz-input" id="abbr-input" placeholder="Type the abbreviation..." autocomplete="off" style="text-transform: uppercase;">
+                                        
+                                        <!-- On-screen Keyboard for Abbreviations -->
+                                        <div class="callsign-keyboard">
+                                            <!-- Numbers Row -->
+                                            <div class="keyboard-row numbers-row">
+                                                <button class="key-btn number" onclick="app.handleAbbrKey('1')">1</button>
+                                                <button class="key-btn number" onclick="app.handleAbbrKey('2')">2</button>
+                                                <button class="key-btn number" onclick="app.handleAbbrKey('3')">3</button>
+                                                <button class="key-btn number" onclick="app.handleAbbrKey('4')">4</button>
+                                                <button class="key-btn number" onclick="app.handleAbbrKey('5')">5</button>
+                                                <button class="key-btn number" onclick="app.handleAbbrKey('6')">6</button>
+                                                <button class="key-btn number" onclick="app.handleAbbrKey('7')">7</button>
+                                                <button class="key-btn number" onclick="app.handleAbbrKey('8')">8</button>
+                                                <button class="key-btn number" onclick="app.handleAbbrKey('9')">9</button>
+                                                <button class="key-btn number" onclick="app.handleAbbrKey('0')">0</button>
+                                            </div>
+                                            <!-- Letters Row 1: QWERTYUIOP -->
+                                            <div class="keyboard-row">
+                                                <button class="key-btn" onclick="app.handleAbbrKey('Q')">Q</button>
+                                                <button class="key-btn" onclick="app.handleAbbrKey('W')">W</button>
+                                                <button class="key-btn" onclick="app.handleAbbrKey('E')">E</button>
+                                                <button class="key-btn" onclick="app.handleAbbrKey('R')">R</button>
+                                                <button class="key-btn" onclick="app.handleAbbrKey('T')">T</button>
+                                                <button class="key-btn" onclick="app.handleAbbrKey('Y')">Y</button>
+                                                <button class="key-btn" onclick="app.handleAbbrKey('U')">U</button>
+                                                <button class="key-btn" onclick="app.handleAbbrKey('I')">I</button>
+                                                <button class="key-btn" onclick="app.handleAbbrKey('O')">O</button>
+                                                <button class="key-btn" onclick="app.handleAbbrKey('P')">P</button>
+                                            </div>
+                                            <!-- Letters Row 2: ASDFGHJKL -->
+                                            <div class="keyboard-row">
+                                                <button class="key-btn" onclick="app.handleAbbrKey('A')">A</button>
+                                                <button class="key-btn" onclick="app.handleAbbrKey('S')">S</button>
+                                                <button class="key-btn" onclick="app.handleAbbrKey('D')">D</button>
+                                                <button class="key-btn" onclick="app.handleAbbrKey('F')">F</button>
+                                                <button class="key-btn" onclick="app.handleAbbrKey('G')">G</button>
+                                                <button class="key-btn" onclick="app.handleAbbrKey('H')">H</button>
+                                                <button class="key-btn" onclick="app.handleAbbrKey('J')">J</button>
+                                                <button class="key-btn" onclick="app.handleAbbrKey('K')">K</button>
+                                                <button class="key-btn" onclick="app.handleAbbrKey('L')">L</button>
+                                            </div>
+                                            <!-- Letters Row 3: ZXCVBNM + Clear/Enter -->
+                                            <div class="keyboard-row">
+                                                <button class="key-btn" onclick="app.handleAbbrKey('Z')">Z</button>
+                                                <button class="key-btn" onclick="app.handleAbbrKey('X')">X</button>
+                                                <button class="key-btn" onclick="app.handleAbbrKey('C')">C</button>
+                                                <button class="key-btn" onclick="app.handleAbbrKey('V')">V</button>
+                                                <button class="key-btn" onclick="app.handleAbbrKey('B')">B</button>
+                                                <button class="key-btn" onclick="app.handleAbbrKey('N')">N</button>
+                                                <button class="key-btn" onclick="app.handleAbbrKey('M')">M</button>
+                                                <button class="key-btn clear" onclick="app.handleAbbrClear()">
+                                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px;">
+                                                        <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                                    </svg>
+                                                </button>
+                                                <button class="key-btn enter" onclick="app.handleAbbrEnter()">
+                                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px;">
+                                                        <polyline points="20 6 9 17 4 12"/>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="feedback-message" id="abbr-feedback"></div>
+                                        
+                                        <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                                            <button class="submit-btn" onclick="app.checkAbbreviation()" style="flex: 1; padding: 0 2rem;">
+                                                <span data-i18n="btn_submit">Submit Answer</span>
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <polyline points="20 6 9 17 4 12"/>
+                                                </svg>
+                                            </button>
+                                            <button class="control-btn secondary" onclick="app.playCurrentAbbreviation()">
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px;">
+                                                    <polygon points="5 3 19 12 5 21 5 3"/>
+                                                </svg>
+                                                <span>Play</span>
+                                            </button>
+                                        </div>
+                                        
+                                        <button class="control-btn secondary" onclick="app.revealAbbreviation()" style="width: 100%; margin-top: 0.5rem;">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;">
+                                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                                <circle cx="12" cy="12" r="3"/>
+                                            </svg>
+                                            <span>Show Answer</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Reference Table -->
+                                <div style="flex: 1; min-width: 280px; max-width: 400px;">
+                                    <div class="glass-card ham-reference" id="abbreviations-list-practice" style="max-height: 500px; overflow-y: auto;">
+                                        <!-- Populated by JS -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- QSO Practice Section -->
+                <div class="ham-subsection" id="ham-qso">
+                    <div class="practice-wrapper">
+                        <div class="practice-card glass-card" style="max-width: 700px;">
+                            <div class="practice-header">
+                                <span class="practice-badge" data-i18n="ham_qso">QSO Exchange</span>
+                                <button class="icon-btn" onclick="app.nextQSO()" title="New QSO">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="23 4 23 10 17 10"/>
+                                        <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            
+                            <div class="qso-display" style="padding: 1.5rem; background: rgba(0,0,0,0.2); border-radius: 12px; margin-bottom: 1.5rem; min-height: 200px;">
+                                <div id="qso-transcript" style="font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; line-height: 1.8; color: var(--text-secondary);">
+                                    <p style="margin-bottom: 0.5rem;"><span style="color: var(--accent-cyan);">CQ CQ CQ DE K1ABC K</span></p>
+                                    <p style="margin-bottom: 0.5rem;"><span style="color: var(--accent-purple);">K1ABC DE W2XYZ UR 599 599 NAME JOHN JOHN QTH BOSTON BOSTON HW?</span></p>
+                                </div>
+                            </div>
+                            
+                            <div class="qso-controls" style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                                <button class="control-btn secondary" onclick="app.playQSOMessage()">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polygon points="5 3 19 12 5 21 5 3"/>
+                                    </svg>
+                                    <span data-i18n="btn_play">Play Message</span>
+                                </button>
+                                <button class="control-btn primary" onclick="app.toggleQSOAnswer()">
+                                    <span>Show Translation</span>
+                                </button>
+                            </div>
+                            
+                            <div id="qso-translation" style="display: none; margin-top: 1.5rem; padding: 1rem; background: rgba(16, 185, 129, 0.1); border: 1px solid var(--accent-green); border-radius: 8px; color: var(--accent-green);">
+                                <p><strong>CQ CQ CQ:</strong> Calling any station</p>
+                                <p><strong>DE:</strong> From/This is</p>
+                                <p><strong>K1ABC:</strong> Station callsign</p>
+                                <p><strong>K:</strong> Go ahead</p>
+                                <p><strong>UR:</strong> Your</p>
+                                <p><strong>599:</strong> Signal report (Perfect)</p>
+                                <p><strong>NAME:</strong> My name is</p>
+                                <p><strong>QTH:</strong> Location</p>
+                                <p><strong>HW?:</strong> How do you copy?</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CW Practice Section -->
+                <div class="ham-subsection" id="ham-cwpractice">
+                    <div class="cw-practice-container">
+                        <!-- Practice Mode Tabs -->
+                        <div class="cw-tabs">
+                            <button class="cw-tab-btn active" data-cw-mode="listen" data-i18n="cw_listen_title">🎧 Listen & Type</button>
+                            <button class="cw-tab-btn" data-cw-mode="read" data-i18n="cw_read_title">✏️ Read & Send</button>
+                            <button class="cw-tab-btn" data-cw-mode="twoway" data-i18n="cw_twoway_title">🔄 Two-way Sim</button>
+                        </div>
+
+                        <!-- Listen & Type Mode -->
+                        <div class="cw-subsection active" id="cw-listen">
+                            <div class="practice-card glass-card" style="max-width: 700px;">
+                                <div class="practice-header">
+                                    <span class="practice-badge" data-i18n="cw_listen_title">Listen & Type</span>
+                                    <button class="icon-btn" onclick="app.nextCWListen()" title="New sentence">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="23 4 23 10 17 10"/>
+                                            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                                
+                                <div class="cw-listen-display" style="text-align: center; padding: 2rem 0;">
+                                    <div class="listening-indicator-large">
+                                        <div class="sound-wave-large">
+                                            <span></span><span></span><span></span><span></span><span></span>
+                                            <span></span><span></span>
+                                        </div>
+                                        <p style="color: var(--text-tertiary); margin-top: 1rem;">Press play to hear the CW message</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="cw-controls" style="display: flex; gap: 1rem; justify-content: center; margin-bottom: 1.5rem;">
+                                    <button class="control-btn primary" onclick="app.playCWListen()">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polygon points="5 3 19 12 5 21 5 3"/>
+                                        </svg>
+                                        <span data-i18n="btn_play">Play Message</span>
+                                    </button>
+                                    <button class="control-btn secondary" onclick="app.showCWListenHint()">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"/>
+                                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                                            <line x1="12" y1="17" x2="12.01" y2="17"/>
+                                        </svg>
+                                        <span>Hint</span>
+                                    </button>
+                                </div>
+                                
+                                <div class="cw-input-section">
+                                    <input type="text" class="quiz-input" id="cw-listen-input" placeholder="Type what you heard..." style="margin-bottom: 1rem;">
+                                    <button class="submit-btn" onclick="app.checkCWListen()">
+                                        <span>Check Answer</span>
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="20 6 9 17 4 12"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                                
+                                <div class="feedback-message" id="cw-listen-feedback"></div>
+                                
+                                <div id="cw-listen-translation" style="display: none; margin-top: 1.5rem; padding: 1rem; background: rgba(99, 102, 241, 0.1); border: 1px solid var(--primary-500); border-radius: 8px;">
+                                    <p style="color: var(--primary-400); font-weight: 600; margin-bottom: 0.5rem;">Translation:</p>
+                                    <p id="cw-listen-meaning" style="color: var(--text-secondary);"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Read & Send Mode -->
+                        <div class="cw-subsection" id="cw-read">
+                            <div class="practice-card glass-card" style="max-width: 700px;">
+                                <div class="practice-header">
+                                    <span class="practice-badge" data-i18n="cw_read_title">Read & Send</span>
+                                    <button class="icon-btn" onclick="app.nextCWRead()" title="New sentence">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="23 4 23 10 17 10"/>
+                                            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                                
+                                <div class="cw-read-display" style="padding: 1.5rem; background: rgba(0,0,0,0.2); border-radius: 12px; margin-bottom: 1.5rem;">
+                                    <p style="color: var(--text-tertiary); font-size: 0.875rem; margin-bottom: 0.5rem;">Send this message in Morse code:</p>
+                                    <p id="cw-read-text" style="font-size: 1.5rem; font-weight: 600; color: var(--text-primary);">CQ CQ CQ DE K1ABC K</p>
+                                    <p id="cw-read-meaning" style="color: var(--text-tertiary); margin-top: 0.5rem; font-size: 0.9rem;"></p>
+                                </div>
+                                
+                                <div class="input-section">
+                                    <div class="input-preview" id="cw-read-input-preview">
+                                        <span class="placeholder">Your Morse code...</span>
+                                    </div>
+                                    
+                                    <div class="input-pad">
+                                        <button class="pad-btn dot" onclick="app.handleCWReadInput('.')">
+                                            <span class="btn-content">
+                                                <span class="btn-icon">•</span>
+                                                <span class="btn-label" data-i18n="btn_dot">Dot</span>
+                                            </span>
+                                        </button>
+                                        <button class="pad-btn dash" onclick="app.handleCWReadInput('-')">
+                                            <span class="btn-content">
+                                                <span class="btn-icon">−</span>
+                                                <span class="btn-label" data-i18n="btn_dash">Dash</span>
+                                            </span>
+                                        </button>
+                                        <button class="pad-btn clear" onclick="app.clearCWReadInput()">
+                                            <span class="btn-content">
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                                </svg>
+                                                <span class="btn-label" data-i18n="btn_clear">Clear</span>
+                                            </span>
+                                        </button>
+                                    </div>
+                                    
+                                    <button class="submit-btn" onclick="app.checkCWRead()">
+                                        <span data-i18n="btn_submit">Submit Answer</span>
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="20 6 9 17 4 12"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                                
+                                <div class="feedback-message" id="cw-read-feedback"></div>
+                            </div>
+                        </div>
+
+                        <!-- Two-way Simulation Mode -->
+                        <div class="cw-subsection" id="cw-twoway">
+                            <div class="practice-card glass-card" style="max-width: 800px;">
+                                <div class="practice-header">
+                                    <span class="practice-badge" data-i18n="cw_twoway_title">Two-way QSO</span>
+                                    <button class="icon-btn" onclick="app.startNewTwoWay()" title="Start new QSO">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="23 4 23 10 17 10"/>
+                                            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                                
+                                <div class="twoway-conversation" style="padding: 1.5rem; background: rgba(0,0,0,0.2); border-radius: 12px; margin-bottom: 1.5rem; min-height: 300px; max-height: 400px; overflow-y: auto;">
+                                    <div id="twoway-transcript" style="font-family: 'JetBrains Mono', monospace; line-height: 1.8;">
+                                        <!-- Conversation turns appear here -->
+                                        <div class="twoway-turn dx-turn" style="margin-bottom: 1rem;">
+                                            <span style="color: var(--accent-cyan); font-weight: 600;">DX:</span>
+                                            <span style="color: var(--text-secondary);">CQ CQ CQ DE K1ABC K</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="twoway-input-area" id="twoway-input-area">
+                                    <p style="color: var(--text-tertiary); margin-bottom: 0.75rem;">Your turn to respond:</p>
+                                    
+                                    <div class="input-preview" id="twoway-input-preview">
+                                        <span class="placeholder">Tap Morse code to reply...</span>
+                                    </div>
+                                    
+                                    <div class="input-pad">
+                                        <button class="pad-btn dot" onclick="app.handleTwoWayInput('.')">
+                                            <span class="btn-content">
+                                                <span class="btn-icon">•</span>
+                                                <span class="btn-label" data-i18n="btn_dot">Dot</span>
+                                            </span>
+                                        </button>
+                                        <button class="pad-btn dash" onclick="app.handleTwoWayInput('-')">
+                                            <span class="btn-content">
+                                                <span class="btn-icon">−</span>
+                                                <span class="btn-label" data-i18n="btn_dash">Dash</span>
+                                            </span>
+                                        </button>
+                                        <button class="pad-btn clear" onclick="app.clearTwoWayInput()">
+                                            <span class="btn-content">
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                                </svg>
+                                                <span class="btn-label" data-i18n="btn_clear">Clear</span>
+                                            </span>
+                                        </button>
+                                    </div>
+                                    
+                                    <button class="submit-btn" onclick="app.submitTwoWayResponse()">
+                                        <span>Send Response</span>
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <line x1="22" y1="2" x2="11" y2="13"/>
+                                            <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                                
+                                <div id="twoway-complete" style="display: none; text-align: center; padding: 2rem;">
+                                    <div style="font-size: 3rem; margin-bottom: 1rem;">🎉</div>
+                                    <h3 style="margin-bottom: 0.5rem;">QSO Complete!</h3>
+                                    <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Great job completing the conversation</p>
+                                    <button class="control-btn primary" onclick="app.startNewTwoWay()">
+                                        <span>Start New QSO</span>
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="23 4 23 10 17 10"/>
+                                            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                                
+                                <div class="feedback-message" id="twoway-feedback"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="glass-footer">
+        <p>Learn Morse Code • <span id="footer-year"></span></p>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        document.getElementById('footer-year').textContent = new Date().getFullYear();
+    </script>
+    <script src="./js/morse-data.js?v=4"></script>
+    <script src="./js/audio.js?v=4"></script>
+    <script src="./js/storage.js?v=4"></script>
+    <script src="./js/i18n.js?v=4"></script>
+    <script src="./js/app.js?v=4"></script>
+</body>
+</html>

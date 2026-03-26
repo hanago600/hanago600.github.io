@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="HAM Radio Beginner's Guide - Learn amateur radio basics, Q-codes, and operating procedures">
+    <meta name="theme-color" content="#0f0f23">
+    <title>HAM Radio Beginner's Guide | Learn Hub</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📻</text></svg>">
+</head>
+<body>
+    <!-- Ambient Background -->
+    <div class="ambient-bg">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="glass-header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">
+                    <span class="pulse-dot"></span>
+                    <span class="pulse-dash"></span>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-title">HAM Radio</span>
+                    <span class="logo-subtitle">Beginner's Guide</span>
+                </div>
+            </div>
+            <a href="../" class="home-btn" title="Back to Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+                <span>Home</span>
+            </a>
+            <div class="header-actions">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                    <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"/>
+                        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                    </svg>
+                    <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <div class="guide-wrapper" style="max-width: 1000px; margin: 0 auto; padding: 2rem 1rem;">
+            <!-- AI Generated Notice -->
+            <div style="margin-bottom: 2rem; padding: 1rem; background: rgba(99, 102, 241, 0.15); border: 1px solid rgba(99, 102, 241, 0.3); border-radius: 12px; display: flex; align-items: center; gap: 0.75rem;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px; color: var(--primary-400); flex-shrink: 0;">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+                <span style="color: var(--text-secondary); font-size: 0.95rem;">
+                    <strong style="color: var(--primary-400);">AI Generated Content:</strong> This guide was created with AI assistance. Please verify critical information with official HAM radio resources and local regulations.
+                </span>
+            </div>
+
+            <!-- Welcome Section -->
+            <div class="guide-section glass-card" style="margin-bottom: 2rem; padding: 2rem;">
+                <h2 style="color: var(--primary-400); margin-bottom: 1rem; font-size: 1.5rem;">📻 Welcome to HAM Radio</h2>
+                <p style="color: var(--text-secondary); line-height: 1.8; font-size: 1.1rem;">
+                    Amateur Radio (HAM) is a hobby where you can communicate with people worldwide using radio waves. 
+                    It's fun, educational, and can be crucial during emergencies when other communication systems fail.
+                </p>
+            </div>
+
+            <!-- First Contact Guide -->
+            <div class="guide-section glass-card" style="margin-bottom: 2rem; padding: 2rem; background: rgba(99, 102, 241, 0.1); border: 1px solid var(--border-color);">
+                <h2 style="color: var(--primary-400); margin-bottom: 1.5rem; font-size: 1.5rem;">🎯 Making Your First Contact</h2>
+                <ol style="color: var(--text-secondary); line-height: 2; padding-left: 1.5rem; font-size: 1.05rem;">
+                    <li><strong style="color: var(--accent-cyan);">CQ CQ CQ</strong> - Call "CQ" three times to indicate you're calling anyone</li>
+                    <li><strong style="color: var(--accent-cyan);">DE [Your Callsign]</strong> - Say "DE" (this is) followed by your callsign</li>
+                    <li><strong style="color: var(--accent-cyan);">K</strong> - End with "K" to invite a response</li>
+                    <li>Wait for someone to answer with your callsign</li>
+                    <li>Exchange signal reports (RST), names, and locations</li>
+                    <li>End with "73" (best regards) and your callsign</li>
+                </ol>
+                <div style="margin-top: 1.5rem; padding: 1.2rem; background: rgba(0,0,0,0.3); border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 1rem; color: var(--accent-cyan); text-align: center;">
+                    Example: CQ CQ CQ DE W1ABC W1ABC K
+                </div>
+            </div>
+
+            <!-- Phonetic Alphabet -->
+            <div class="guide-section glass-card" style="margin-bottom: 2rem; padding: 2rem;">
+                <h2 style="color: var(--primary-400); margin-bottom: 1.5rem; font-size: 1.5rem;">🔤 Phonetic Alphabet</h2>
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 1.05rem;">Used to clearly spell out callsigns and important words:</p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.75rem; font-family: 'JetBrains Mono', monospace; font-size: 0.95rem;">
+                    <div style="padding: 0.75rem; background: rgba(0,0,0,0.2); border-radius: 8px;"><span style="color: var(--accent-cyan); font-weight: 600;">A</span> - Alpha</div>
+                    <div style="padding: 0.75rem; background: rgba(0,0,0,0.2); border-radius: 8px;"><span style="color: var(--accent-cyan); font-weight: 600;">B</span> - Bravo</div>
+                    <div style="padding: 0.75rem; background: rgba(0,0,0,0.2); border-radius: 8px;"><span style="color: var(--accent-cyan); font-weight: 600;">C</span> - Charlie</div>
+                    <div style="padding: 0.75rem; background: rgba(0,0,0,0.2); border-radius: 8px;"><span style="color: var(--accent-cyan); font-weight: 600;">D</span> - Delta</div>
+                    <div style="padding: 0.75rem; background: rgba(0,0,0,0.2); border-radius: 8px;"><span style="color: var(--accent-cyan); font-weight: 600;">E</span> - Echo</div>
+                    <div style="padding: 0.75rem; background: rgba(0,0,0,0.2); border-radius: 8px;"><span style="color: var(--accent-cyan); font-weight: 600;">F</span> - Foxtrot</div>
+                    <div style="padding: 0.75rem; background: rgba(0,0,0,0.2); border-radius: 8px;"><span style="color: var(--accent-cyan); font-weight: 600;">G</span> - Golf</div>
+                    <div style="padding: 0.75rem; background: rgba(0,0,0,0.2); border-radius: 8px;"><span style="color: var(--accent-cyan); font-weight: 600;">H</span> - Hotel</div>
+                    <div style="padding: 0.75rem; background: rgba(0,0,0,0.2); border-radius: 8px;"><span style="color: var(--accent-cyan); font-weight: 600;">I</span> - India</div>
+                    <div style="padding: 0.75rem; background: rgba(0,0,0,0.2); border-radius: 8px;"><span style="color: var(--accent-cyan); font-weight: 600;">J</span> - Juliet</div>
+                    <div style="padding: 0.75rem; background: rgba(0,0,0,0.2); border-radius: 8px;"><span style="color: var(--accent-cyan); font-weight: 600;">K</span> - Kilo</div>
+                    <div style="padding: 0.75rem; background: rgba(0,0,0,0.2); border-radius: 8px;"><span style="color: var(--accent-cyan); font-weight: 600;">L</span> - Lima</div>
+                    <div style="padding: 0.75rem; background: rgba(0,0,0,0.2); border-radius: 8px;"><span style="color: var(--accent-cyan); font-weight: 600;">M</span> - Mike</div>
+                    <div style="padding: 0.75rem; background: rgba(0,0,0,0.2); border-radius: 8px;"><span style="color: var(--accent-cyan); font-weight: 600;">N</span> - November</div>
+                    <div style="padding: 0.75rem; background: rgba(0,0,0,0.2); border-radius: 8px;"><span style="color: var(--accent-cyan); font-weight: 600;">O</span> - Oscar</div>
+                    <div style="padding: 0.75rem; background: rgba(0,0,0,0.2); border-radius: 8px;"><span style="color: var(--accent-cyan); font-weight: 600;">P</span> - Papa</div>
+                    <div style="padding: 0.75rem; background: rgba(0,0,0,0.2); border-radius: 8px;"><span style="color: var(--accent-cyan); font-weight: 600;">Q</span> - Quebec</div>
+                    <div style="padding: 0.75rem; background: rgba(0,0,0,0.2); border-radius: 8px;"><span style="color: var(--accent-cyan); font-weight: 600;">R</span> - Romeo</div>
+                    <div style="padding: 0.75rem; background: rgba(0,0,0,0.2); border-radius: 8px;"><span style="color: var(--accent-cyan); font-weight: 600;">S</span> - Sierra</div>
+                    <div style="padding: 0.75rem; background: rgba(0,0,0,0.2); border-radius: 8px;"><span style="color: var(--accent-cyan); font-weight: 600;">T</span> - Tango</div>
+                    <div style="padding: 0.75rem; background: rgba(0,0,0,0.2); border-radius: 8px;"><span style="color: var(--accent-cyan); font-weight: 600;">U</span> - Uniform</div>
+                    <div style="padding: 0.75rem; background: rgba(0,0,0,0.2); border-radius: 8px;"><span style="color: var(--accent-cyan); font-weight: 600;">V</span> - Victor</div>
+                    <div style="padding: 0.75rem; background: rgba(0,0,0,0.2); border-radius: 8px;"><span style="color: var(--accent-cyan); font-weight: 600;">W</span> - Whisky</div>
+                    <div style="padding: 0.75rem; background: rgba(0,0,0,0.2); border-radius: 8px;"><span style="color: var(--accent-cyan); font-weight: 600;">X</span> - X-ray</div>
+                    <div style="padding: 0.75rem; background: rgba(0,0,0,0.2); border-radius: 8px;"><span style="color: var(--accent-cyan); font-weight: 600;">Y</span> - Yankee</div>
+                    <div style="padding: 0.75rem; background: rgba(0,0,0,0.2); border-radius: 8px;"><span style="color: var(--accent-cyan); font-weight: 600;">Z</span> - Zulu</div>
+                </div>
+            </div>
+
+            <!-- RST Signal Report -->
+            <div class="guide-section glass-card" style="margin-bottom: 2rem; padding: 2rem; background: rgba(16, 185, 129, 0.1);">
+                <h2 style="color: var(--primary-400); margin-bottom: 1.5rem; font-size: 1.5rem;">📊 RST Signal Report</h2>
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 1.05rem;">Used to report signal quality (Readability, Strength, Tone):</p>
+                <div style="display: grid; gap: 1.5rem;">
+                    <div style="padding: 1rem; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                        <strong style="color: var(--accent-cyan); font-size: 1.1rem;">R - Readability (1-5)</strong>
+                        <div style="color: var(--text-secondary); margin-top: 0.5rem;">
+                            1 = Unreadable, 3 = Readable with difficulty, 5 = Perfectly readable
+                        </div>
+                    </div>
+                    <div style="padding: 1rem; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                        <strong style="color: var(--accent-cyan); font-size: 1.1rem;">S - Signal Strength (1-9)</strong>
+                        <div style="color: var(--text-secondary); margin-top: 0.5rem;">
+                            1 = Faint, 5 = Good, 9 = Extremely strong
+                        </div>
+                    </div>
+                    <div style="padding: 1rem; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                        <strong style="color: var(--accent-cyan); font-size: 1.1rem;">T - Tone (1-9, CW only)</strong>
+                        <div style="color: var(--text-secondary); margin-top: 0.5rem;">
+                            1 = Raw AC, 5 = Good tone, 9 = Perfect tone
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(0,0,0,0.3); border-radius: 8px; text-align: center; font-family: 'JetBrains Mono', monospace; color: var(--accent-green); font-size: 1.1rem;">
+                    A perfect signal is reported as <strong style="font-size: 1.3rem;">599</strong>
+                </div>
+            </div>
+
+            <!-- Essential Abbreviations -->
+            <div class="guide-section glass-card" style="margin-bottom: 2rem; padding: 2rem;">
+                <h2 style="color: var(--primary-400); margin-bottom: 1.5rem; font-size: 1.5rem;">💬 Essential Abbreviations</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                    <div style="padding: 1rem; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                        <strong style="color: var(--accent-cyan); font-size: 1.1rem;">73</strong> - Best regards
+                    </div>
+                    <div style="padding: 1rem; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                        <strong style="color: var(--accent-cyan); font-size: 1.1rem;">88</strong> - Love and kisses
+                    </div>
+                    <div style="padding: 1rem; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                        <strong style="color: var(--accent-cyan); font-size: 1.1rem;">GM</strong> - Good morning
+                    </div>
+                    <div style="padding: 1rem; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                        <strong style="color: var(--accent-cyan); font-size: 1.1rem;">GA</strong> - Good afternoon
+                    </div>
+                    <div style="padding: 1rem; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                        <strong style="color: var(--accent-cyan); font-size: 1.1rem;">GE</strong> - Good evening
+                    </div>
+                    <div style="padding: 1rem; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                        <strong style="color: var(--accent-cyan); font-size: 1.1rem;">UR</strong> - Your / You're
+                    </div>
+                    <div style="padding: 1rem; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                        <strong style="color: var(--accent-cyan); font-size: 1.1rem;">R</strong> - Roger (received)
+                    </div>
+                    <div style="padding: 1rem; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                        <strong style="color: var(--accent-cyan); font-size: 1.1rem;">C</strong> - Yes / Correct
+                    </div>
+                    <div style="padding: 1rem; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                        <strong style="color: var(--accent-cyan); font-size: 1.1rem;">FB</strong> - Fine business (excellent)
+                    </div>
+                    <div style="padding: 1rem; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                        <strong style="color: var(--accent-cyan); font-size: 1.1rem;">OM</strong> - Old man (any male)
+                    </div>
+                    <div style="padding: 1rem; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                        <strong style="color: var(--accent-cyan); font-size: 1.1rem;">YL</strong> - Young lady (any female)
+                    </div>
+                    <div style="padding: 1rem; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                        <strong style="color: var(--accent-cyan); font-size: 1.1rem;">XYL</strong> - Wife (ex-YL)
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tips Section -->
+            <div class="guide-section glass-card" style="padding: 2rem; background: rgba(245, 158, 11, 0.1);">
+                <h2 style="color: var(--primary-400); margin-bottom: 1.5rem; font-size: 1.5rem;">💡 Tips for Success</h2>
+                <ul style="color: var(--text-secondary); line-height: 2; padding-left: 1.5rem; font-size: 1.05rem;">
+                    <li>Always listen before transmitting to avoid interrupting</li>
+                    <li>Speak clearly and at a moderate pace</li>
+                    <li>Use the phonetic alphabet for your callsign</li>
+                    <li>Keep QSOs brief when bands are busy</li>
+                    <li>Log your contacts for awards and contests</li>
+                    <li>Join a local amateur radio club to learn from experienced operators</li>
+                    <li>Practice CW regularly - even 10 minutes a day helps!</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="glass-footer">
+        <p>HAM Radio Beginner's Guide • <span id="footer-year"></span></p>
+    </footer>
+
+    <script>
+        document.getElementById('footer-year').textContent = new Date().getFullYear();
+        
+        // Theme handling
+        const themeToggle = document.getElementById('theme-toggle');
+        const STORAGE_KEY = 'morseCodeApp';
+        
+        function loadTheme() {
+            try {
+                const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+                const theme = data.settings?.theme || 'dark';
+                if (theme === 'light') {
+                    document.body.classList.add('light-theme');
+                }
+            } catch (e) {
+                console.warn('Could not load theme');
+            }
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            const isLight = document.body.classList.toggle('light-theme');
+            const newTheme = isLight ? 'light' : 'dark';
+            
+            try {
+                const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+                if (!data.settings) data.settings = {};
+                data.settings.theme = newTheme;
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+            } catch (e) {
+                console.warn('Could not save theme');
+            }
+        });
+        
+        loadTheme();
+    </script>
+</body>
+</html>
